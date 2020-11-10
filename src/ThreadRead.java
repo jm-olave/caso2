@@ -1,38 +1,33 @@
-import java.awt.*;
 
 public class ThreadRead extends Thread{
 
-	public static boolean encontrado = false;
+	//public static boolean encontrado = false;
 	
-	public static String txtOrigen;
+	//public static String txtOrigen;
 	
-	public static String algo;
+	private String algo;
 	
-	public static byte[] buscado;
+	//public static byte[] buscado;
 	
-	private String path = "";
+	private String path;
 	
-	private  LeerArchivo leer= new LeerArchivo();
+	private static LeerArchivo leer= new LeerArchivo();
 	
-	public ThreadRead(String path) {
+	public ThreadRead(String path, String algo) {
 		this.path = path;
+		this.algo = algo;
 	}
 	
-	public  synchronized void setTextoOrigen(String res) {
-		txtOrigen = res;
-	}
-
-
+//	public static synchronized void setTextoOrigen(String res) {
+//		txtOrigen = res;
+//	}
+	
+	@Override
 	public void run() {
-
-		String texto = leer.identificar_Entrada(buscado, algo, path);
-		System.out.println("null?" + texto);
+		String texto = leer.identificar_Entrada(algo, path);
 		if(texto != null)
-		{
-			setTextoOrigen(texto);
-		}
-
-
+			leer.asignarTexto(texto);
+			//setTextoOrigen(texto);
 
 	}
 }
